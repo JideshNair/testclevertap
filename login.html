@@ -51,7 +51,100 @@ clevertap.event.push("Logged In");
     "okButtonText":'Sign me up!',
     "rejectButtonText":'No thanks',
     "okButtonColor":'#f28046'});
-  
+ //Recording a User Event called Product Viewed in JS enabled custom in-apps.
+var props = {foo: 'xyz', lang2: 'French'};
+var message = { action:'recordEventWithProps', event:'Product Viewed', props: props};
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+ // Call iOS interface       
+  window.webkit.messageHandlers.clevertap.postMessage(message);         
+} 
+
+//Updating profile properties of the User in JS enabled custom in-apps.
+var props = {foo: 'xyz', lang: 'French'};
+var message = { action:profilePush, properties: props};
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+  window.webkit.messageHandlers.clevertap.postMessage(message);        
+}
+var props2 = {Identity: 'JideshTest1234', lang: 'French'};
+var message = { action:OnuserLogin, properties: props2};
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+  window.webkit.messageHandlers.clevertap.postMessage(message);        
+}
+//Setting a user profile
+var message = {
+                action: 'profileSetMultiValues',
+                value: ['bag', 'kitkat'],
+                key: 'myStuff'
+            };
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+   window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+//Add multi value
+var message = {action: 'profileAddMultiValue',
+             value: 'coat', 
+             key: 'myStuff'};
+
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+   window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+//Add multi values
+ var message = {action: 'profileAddMultiValues',
+                values: ['bag', 'kitkat', 'Wine'],
+                key: 'myStuff'};
+
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+   window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+//Remove value for key
+var message = {action: 'profileRemoveValueForKey',
+                    key: 'myStuff' };
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+    window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+//Remove multi values for key
+ var message = {action: 'profileRemoveMultiValues',
+                values: ['scarf', 'knife'],
+                key: 'myStuff'};
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+   window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+//Remove multi Value
+var message = {action: 'profileRemoveMultiValue',
+                value: 'bag',
+                key: 'myStuff'};
+if(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap){
+    window.webkit.messageHandlers.clevertap.postMessage(message);
+}
+
+
+// Record Charged Event
+const chargeDetails = {
+                "Amount" : 300,
+                "Payment mode": "Credit Card",
+                "Charged ID": 24052013
+};
+const items = [{
+       "Category": "books",
+        "Book name": "The Millionaire next door",
+        "Quantity": 1
+        },{
+        "Category": "books",
+        "Book name": "The Millionaire previous door",
+        "Quantity": 5
+];
+const message = {
+       action:'recordChargedEvent',
+       chargeDetails: chargeDetails,
+       items: items
+};
+if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.clevertap) {
+     window.webkit.messageHandlers.clevertap.postMessage(message);
+} 
        
   
 </script>
